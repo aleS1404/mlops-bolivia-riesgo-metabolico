@@ -1,0 +1,14 @@
+{
+  "features": [
+    "IMC",
+    "Peso",
+    "Talla",
+    "Anemia",
+    "AreaUrbana",
+    "AltitudAlta",
+    "Embarazada",
+    "Departamento",
+    "ZonaGeografica"
+  ],
+  "target": "RiesgoMetabolicoClase"
+}
