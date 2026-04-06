@@ -29,7 +29,7 @@ import uvicorn
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse,HTMLResponse
 from loguru import logger
 from pydantic import BaseModel, Field, field_validator
 
@@ -183,6 +183,18 @@ async def raiz():
         "docs"       : "/docs",
     }
 
+# 🔥 AQUI VA TU DASHBOARD
+@app.get("/dashboard", response_class=HTMLResponse)
+async def dashboard():
+    html_path = Path(__file__).parent / "templates" / "index.html"
+
+    if not html_path.exists():
+        raise HTTPException(
+            status_code=404,
+            detail=f"No se encontró el HTML en: {html_path}"
+        )
+
+    return HTMLResponse(content=html_path.read_text(encoding="utf-8"))
 
 @app.get("/salud", tags=["Info"])
 async def health_check():
